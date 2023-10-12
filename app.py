@@ -1,6 +1,6 @@
-from get_excel_data import excel_to_list
 from get_ip import get_ipv4
-from checker import add_check_status
+from checker import excel_to_list
+from checker import add_check_status, match_list
 from flask import Flask, request
 from flask_cors import CORS
 import json
@@ -12,11 +12,10 @@ app = Flask(__name__)
 CORS(app)
 @app.route("/", methods=["POST", "GET"])
 def interact():
-    check_list = excel_to_list("data_sheets/Cable Library Tool 202301.xlsm", "Common parts")
     if request.method == "POST":
+        target_list = match_list(json.loads(list(request.form.keys())[0])["team"])
         bom = json.loads(list(request.form.keys())[0])["BOM"]
-        add_check_status(check_list, bom)
-        print(bom)
+        add_check_status(target_list, bom)
         return json.dumps(bom)
     return json.dumps({"connected":True})
 

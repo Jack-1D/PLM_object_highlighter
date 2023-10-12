@@ -4,6 +4,7 @@ const exist_text = document.getElementById("exist_text");
 const not_exist_text = document.getElementById("not_exist_text");
 const exist_itemNum = document.getElementById("exist_itemNum");
 const not_exist_itemNum = document.getElementById("not_exist_itemNum");
+const team_select = document.getElementById("team");
 
 
 var ip_address = "";
@@ -47,6 +48,8 @@ function openURL() {
     connected.then(data => { if (data) connect_button.style = "display:none"; });
 }
 
+team_select.value = localStorage.getItem("team_select")
+
 // 主程式
 submit_button.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -54,7 +57,7 @@ submit_button.addEventListener("click", async (e) => {
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         func: analyze,
-        args: [ip_address]
+        args: [ip_address, team_select.value]
     },
         (analyze_result) => {
             console.log(analyze_result);
@@ -72,10 +75,11 @@ submit_button.addEventListener("click", async (e) => {
             not_exist_text.innerText = not_exist.length;
             exist_itemNum.innerText = exist.join('\n');
             not_exist_itemNum.innerText = not_exist.join('\n');
+            localStorage.setItem("team_select", team_select.value)
         });
 });
 
-function analyze(ip_address) {
+function analyze(ip_address, team) {
     var BOM = [];
     var Item = document.getElementById("ITEMTABLE_BOM").getElementsByClassName("GMPageOne")[1].getElementsByClassName("GMSection")[0].getElementsByTagName("tbody")[0].children;
     for (var i = 0; i < Item.length; i++) {
@@ -99,7 +103,8 @@ function analyze(ip_address) {
         method: 'POST',
         headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
         body: JSON.stringify({
-            'BOM': BOM
+            'BOM': BOM,
+            'team': team
         })
     })
         .then(response => response.json())
