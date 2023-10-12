@@ -1,3 +1,6 @@
+# xlsm
+data_sheets/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
