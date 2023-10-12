@@ -1,7 +1,7 @@
 # PLM_object_highlighter
 PLM crawler
 
-''' bash
+``` bash
 python -m venv venv
 venv/Scripts/activate
-'''
+``` 
