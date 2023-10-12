@@ -1,8 +1,25 @@
-import pandas as pd
+from get_excel_data import excel_to_list
+from get_ip import get_ipv4
+from flask import Flask, request
+from flask_cors import CORS
+import json
+from typing import Final
 
-df = pd.read_excel("data_sheets/Cable Library Tool 202301.xlsm", sheet_name="Common parts").iloc[:,[0]]
-object_list = df.values.tolist()
-flatten_list = lambda l : [flat for tmp in l for flat in flatten_list(tmp)] if type(l) == list else [l]
+PORT: Final[int] = 5000
 
-flat_list = flatten_list(object_list)
-print(flat_list)
+app = Flask(__name__)
+CORS(app)
+@app.route("/", methods=["POST", "GET"])
+def interact():
+    cable = excel_to_list("data_sheets/Cable Library Tool 202301.xlsm", "Common parts")
+    if request.method == "POST":
+        print("aaa")
+        bom = json.loads(list(request.form.keys())[0])["BOM"]
+        print(bom)
+        return json.dumps({"connected":True})
+    return json.dumps({"connected":True})
+
+
+if __name__ == "__main__":
+    get_ipv4(PORT)
+    app.run(ssl_context="adhoc", host="0.0.0.0", port=PORT)
