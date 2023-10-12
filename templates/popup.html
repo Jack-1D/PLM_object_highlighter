@@ -2,17 +2,32 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <style>
+            textarea {
+              resize: none;
+            }
+        
+            body::-webkit-scrollbar {
+              display: none;
+            }
+        
+            body {
+              width: 600px;
+              height: 200px;
+              overflow: visible;
+            }
+          </style>
     </head>
 
     <body>
-        <div style="background-color: white;">
+        <div style="background-color: #EBD3E8;">
             <h2 style="text-align: center;color: #FF8000;">PLM Object Highlighter</h2>
             <button id="connect"
                 style="border-color: blue;background-color: white;">need
                 connect</button>
-            <div style="clear:both;"></div>
-            <h3 style="color: #000079;">Team:</h3>
-            <form method="post">
+                <div style="clear:both;"></div>
+                <h3 style="color: #000079;">Team:</h3>
+                <form method="post">
                 <select name="team">
                     <option value="cable">cable</option>
                     <option value="thermal">thermal</option>
@@ -20,6 +35,46 @@
                 <br><br><br>
                 <input type="submit" id="submit_button" style="width: 200px;height: 70px;" value="Highlight">
             </form>
+            <div style="display: flex;flex-direction:row;position:relative;">
+                <div style="display: flex;flex-direction:column;">
+                  <div style="text-align: center;">
+                    <h2>Exist</h2>
+                </div>
+                <div style="text-align: center;margin-left: 100px;">
+                  <div id="name_result" style="width: 100px;height: 30px;border: solid #000;background-color: #53FF53;">
+                    <div id="exist_text" style="font-size: 20px;height: 30px;line-height: 30px;">
+                      0
+                    </div>
+                  </div>
+                </div>
+                <div style="margin-top: 10px;margin-left: 10px;height: 100%;">
+                    <div style="width: 280px;border: solid #000;background-color: white;height: 100%;">
+                      <div id="exist_itemNum" style="font-size: 20px;text-align: center;">
+                        result
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex;flex-direction:column;">
+                  <div style="text-align: center;">
+                    <h2>Not Exist</h2>
+                  </div>
+                  <div style="text-align: center;margin-left: 100px;">
+                    <div id="bom_result" style="width: 100px;height: 30px;border: solid #000;background-color: #FF0000;">
+                      <div id="not_exist_text" style="font-size: 20px;height: 30px;line-height: 30px;">
+                        0
+                      </div>
+                    </div>
+                  </div>
+                  <div style="margin-top: 10px;margin-left: 10px;height: 100%;">
+                    <div style="width: 280px;border: solid #000;background-color: white;height: 100%;">
+                      <div id="not_exist_itemNum" style="font-size: 20px;text-align: center;">
+                        result
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
         <script src="/js/popup.js"></script>
     </body>

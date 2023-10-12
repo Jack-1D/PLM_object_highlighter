@@ -1,5 +1,9 @@
 const submit_button = document.getElementById("submit_button");
 const connect_button = document.getElementById("connect");
+const exist_text = document.getElementById("exist_text");
+const not_exist_text = document.getElementById("not_exist_text");
+const exist_itemNum = document.getElementById("exist_itemNum");
+const not_exist_itemNum = document.getElementById("not_exist_itemNum");
 
 
 var ip_address = "";
@@ -54,6 +58,20 @@ submit_button.addEventListener("click", async (e) => {
     },
         (analyze_result) => {
             console.log(analyze_result);
+            analyze_result = analyze_result[0]["result"];
+            var exist = [];
+            var not_exist = [];
+            for (var i = 0; i < analyze_result.length; i++){
+                if (analyze_result[i].status == "exist") {
+                    exist.push(analyze_result[i]["itemNumber"]);
+                } else {
+                    not_exist.push(analyze_result[i]['itemNumber']);
+                }
+            }
+            exist_text.innerText = exist.length;
+            not_exist_text.innerText = not_exist.length;
+            exist_itemNum.innerText = exist.join('\n');
+            not_exist_itemNum.innerText = not_exist.join('\n');
         });
 });
 
@@ -86,6 +104,30 @@ function analyze(ip_address) {
     })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
+            for (var i = 1; i < Item.length; i++) {
+                let bom_result = data[i - 1];
+                console.log(bom_result);
+                if (Item[i].hasAttribute('style')) {
+                    if (Item[i].style.display == "none")
+                        Item[i].style.display = '';
+                }
+                if ((Item[i].hasAttribute('style') && Item[i].getElementsByTagName("tr"))) {
+                    var Item2 = Item[i];
+                    if (bom_result.status == "exist") {
+                        var cells = Item2.getElementsByTagName("td");
+                        for (var j = 0; j < cells.length; j++) {
+                            cells[j].style.backgroundColor = '#28FF28';
+                        }
+                    } else if (bom_result.status == "not_exist") {
+                        var cells = Item2.getElementsByTagName("td");
+                        for (var j = 0; j < cells.length; j++) {
+                            cells[j].style.backgroundColor = "#FF9797";
+                        }
+                    }
+                }
+            }
             return data;
-        })
+        });
+    return check_result;
 }
