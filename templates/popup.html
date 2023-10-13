@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="highlight_button.css">
         <style>
             textarea {
               resize: none;
@@ -21,19 +22,28 @@
 
     <body>
         <div style="background-color: #EBD3E8;">
-            <h2 style="text-align: center;color: #FF8000;">PLM Object Highlighter</h2>
-            <button id="connect"
-                style="border-color: blue;background-color: white;">need
-                connect</button>
+            <div style="display: flex;flex-direction: row;">
+                <div style="padding-left: 30px;padding-top: 25px;">
+                    <button id="connect"
+                        style="border-color: blue;background-color: white;">need
+                        connect</button>
+                </div>
+                <h1 id="title" style="padding-left: 35px; text-align: center;color: #FF8000;">PLM Object Highlighter</h1>
+            </div>
             <div style="clear:both;"></div>
-            <h3 style="color: #000079;">Team:</h3>
+            <h2 style="color: #000079;padding-left: 100px;margin: 2px;">Team:</h2>
             <form method="post">
-                <select name="team" id="team">
-                    <option value="cable">cable</option>
-                    <option value="other">Other team</option>
-                </select>
-                <br><br><br>
-                <input type="submit" id="submit_button" style="width: 200px;height: 70px;" value="Highlight">
+                <div style="display: flex;flex-direction:row;">
+                    <div style="padding-left: 100px;padding-top: 10px;">
+                        <select name="team" id="team" style="font-size: 20px;">
+                            <option value="cable">cable</option>
+                            <option value="other">Other team</option>
+                        </select>
+                    </div>
+                    <div style="padding-left: 95px;">
+                        <input class="btn" type="submit" id="submit_button" style="width: 250px;height: 50px;" value="Highlight">
+                    </div>
+                </div>
             </form>
             <div style="display: flex;flex-direction:row;position:relative;">
                 <div style="display: flex;flex-direction:column;">

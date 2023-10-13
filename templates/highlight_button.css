@@ -1,0 +1,15 @@
+input {
+    border: 0;
+    background-color: #0080FF;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: large;
+}
+
+input:hover {
+    color: #0080FF;
+    background-color: #fff;
+    border: 2px #0080FF solid;
+    font-size: large;
+}

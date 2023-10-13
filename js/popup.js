@@ -5,6 +5,7 @@ const not_exist_text = document.getElementById("not_exist_text");
 const exist_itemNum = document.getElementById("exist_itemNum");
 const not_exist_itemNum = document.getElementById("not_exist_itemNum");
 const team_select = document.getElementById("team");
+const title = document.getElementById("title");
 
 
 var ip_address = "";
@@ -28,7 +29,11 @@ var connected = fetch(ip_address, {
         if (data.connected == true) return true;
     })
     .catch(() => { return false })
-connected.then(data => { if (data) connect_button.style = "display:none"; });
+connected.then(data => {
+    if (data) {
+        connect_button.style = "display:none";
+        title.style = "padding-left: 130px; text-align: center;color: #FF8000;"
+} });
 
 connect_button.addEventListener("click", async (e) => {
     e.preventDefault();

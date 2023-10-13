@@ -1,9 +1,9 @@
 from get_ip import get_ipv4
-from checker import excel_to_list
 from checker import add_check_status, match_list
 from flask import Flask, request
 from flask_cors import CORS
 import json
+import time
 from typing import Final
 
 PORT: Final[int] = 5000
@@ -13,9 +13,12 @@ CORS(app)
 @app.route("/", methods=["POST", "GET"])
 def interact():
     if request.method == "POST":
+        start = time.time()
         target_list = match_list(json.loads(list(request.form.keys())[0])["team"])
         bom = json.loads(list(request.form.keys())[0])["BOM"]
         add_check_status(target_list, bom)
+        end = time.time()
+        print(f"共花費{end-start}秒")
         return json.dumps(bom)
     return json.dumps({"connected":True})
 
