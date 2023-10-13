@@ -66,14 +66,17 @@ submit_button.addEventListener("click", async (e) => {
     },
         (analyze_result) => {
             console.log(analyze_result);
-            analyze_result = analyze_result[0]["result"];
+            var analyze_bom = analyze_result[0].result.bom;
+            var prefix = analyze_result[0].result.prefix;
+            console.log(analyze_bom);
+            console.log(prefix);
             var exist = [];
             var not_exist = [];
-            for (var i = 0; i < analyze_result.length; i++){
-                if (analyze_result[i].status == "exist") {
-                    exist.push(analyze_result[i]["itemNumber"]);
-                } else {
-                    not_exist.push(analyze_result[i]['itemNumber']);
+            for (var i = 0; i < analyze_bom.length; i++){
+                if (analyze_bom[i].status == "exist") {
+                    exist.push(analyze_bom[i]["itemNumber"]);
+                } else if(analyze_bom[i].itemNumber.substring(0, 2) == prefix) {
+                    not_exist.push(analyze_bom[i]['itemNumber']);
                 }
             }
             exist_text.innerText = exist.length;
@@ -116,7 +119,7 @@ function analyze(ip_address, team) {
         .then(data => {
             console.log(data);
             for (var i = 1; i < Item.length; i++) {
-                let bom_result = data[i - 1];
+                let bom_result = data.bom[i - 1];
                 console.log(bom_result);
                 if (Item[i].hasAttribute('style')) {
                     if (Item[i].style.display == "none")

@@ -16,7 +16,7 @@ def interact():
         target_list = match_list(json.loads(list(request.form.keys())[0])["team"])
         bom = json.loads(list(request.form.keys())[0])["BOM"]
         add_check_status(target_list, bom)
-        return json.dumps(bom)
+        return json.dumps({"bom":bom, "prefix":target_list[0][:2]})
     return json.dumps({"connected":True})
 
 
