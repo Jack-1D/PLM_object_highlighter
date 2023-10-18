@@ -120,6 +120,7 @@ function analyze(ip_address, team) {
             console.log(data);
             for (var i = 1; i < Item.length; i++) {
                 let bom_result = data.bom[i - 1];
+                var prefix = data.prefix;
                 console.log(bom_result);
                 if (Item[i].hasAttribute('style')) {
                     if (Item[i].style.display == "none")
@@ -132,7 +133,7 @@ function analyze(ip_address, team) {
                         for (var j = 0; j < cells.length; j++) {
                             cells[j].style.backgroundColor = '#28FF28';
                         }
-                    } else if (bom_result.status == "not_exist") {
+                    } else if (bom_result.status == "not_exist" && bom_result.itemNumber.substring(0,2) == prefix) {
                         var cells = Item2.getElementsByTagName("td");
                         for (var j = 0; j < cells.length; j++) {
                             cells[j].style.backgroundColor = "#FF9797";
