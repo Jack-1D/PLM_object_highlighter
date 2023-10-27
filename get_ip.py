@@ -16,8 +16,8 @@ def get_ipv4(PORT: int) -> None:
 def alive_get_ipv4(PORT: int) -> None:
     while True:
         get_ipv4(PORT)
-        remove_pycache()
-        time.sleep(60)
+        # remove_pycache()
+        time.sleep(10)
 
 def remove_pycache() -> None:
     if os.path.exists("__pycache__"):

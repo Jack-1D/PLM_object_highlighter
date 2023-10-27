@@ -33,7 +33,8 @@ connected.then(data => {
     if (data) {
         connect_button.style = "display:none";
         title.style = "padding-left: 130px; text-align: center;color: #FF8000;"
-} });
+    }
+});
 
 connect_button.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -66,30 +67,24 @@ submit_button.addEventListener("click", async (e) => {
     },
         (analyze_result) => {
             console.log(analyze_result);
-            var analyze_bom = analyze_result[0].result.bom;
-            var prefix = analyze_result[0].result.prefix;
-            console.log(analyze_bom);
-            console.log(prefix);
-            var exist = [];
-            var not_exist = [];
-            for (var i = 0; i < analyze_bom.length; i++){
-                if (analyze_bom[i].status == "exist") {
-                    exist.push(analyze_bom[i]["itemNumber"]);
-                } else if(analyze_bom[i].itemNumber.substring(0, 2) == prefix) {
-                    not_exist.push(analyze_bom[i]['itemNumber']);
-                }
-            }
-            exist_text.innerText = exist.length;
-            not_exist_text.innerText = not_exist.length;
-            exist_itemNum.innerText = exist.join('\n');
-            not_exist_itemNum.innerText = not_exist.join('\n');
+            exist_text.innerText = analyze_result[0].result.exist_list.length;
+            not_exist_text.innerText = analyze_result[0].result.not_exist_list.length;
+            exist_itemNum.innerText = analyze_result[0].result.exist_list.join('\n');
+            not_exist_itemNum.innerText = analyze_result[0].result.not_exist_list.join('\n');
             localStorage.setItem("team_select", team_select.value)
         });
 });
 
 function analyze(ip_address, team) {
     var BOM = [];
-    var Item = document.getElementById("ITEMTABLE_BOM").getElementsByClassName("GMPageOne")[1].getElementsByClassName("GMSection")[0].getElementsByTagName("tbody")[0].children;
+    // var Item = document.getElementById("treegrid_ITEMTABLE_BOM").getElementById("ITEMTABLE_BOM").getElementsByClassName("GMPageOne")[1].getElementsByClassName("GMSection")[0].getElementsByTagName("tbody")[0].querySelectorAll("tr.GMDataRow");
+    if(document.getElementById("ITEMTABLE_BOM") !== null)
+        var Item = document.getElementById("ITEMTABLE_BOM").getElementsByClassName("GMBodyMid")[0].querySelectorAll("tr.GMDataRow");
+    else
+        var Item = document.getElementById("BOM_EXPANDED_DISPLAY_1").getElementsByClassName("GMBodyMid")[0].querySelectorAll("tr.GMDataRow");
+    for (var i = 0; i < Item.length; i++){
+        console.log(Item[i].querySelectorAll("td")[4].getElementsByTagName("a").innerText);
+    }
     for (var i = 0; i < Item.length; i++) {
         if (Item[i].hasAttribute('class')) {
             if (Item[i].attributes['class'].value == "GMDataRow") {
@@ -118,25 +113,34 @@ function analyze(ip_address, team) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            for (var i = 1; i < Item.length; i++) {
-                let bom_result = data.bom[i - 1];
-                var prefix = data.prefix;
+            data.exist_list = new Array();
+            data.not_exist_list = new Array();
+            for (var i = 0; i < Item.length; i++) {
+                let bom_result = data.bom[i];
+                var prefix_list = data.prefix_list;
                 console.log(bom_result);
-                if (Item[i].hasAttribute('style')) {
-                    if (Item[i].style.display == "none")
-                        Item[i].style.display = '';
-                }
-                if ((Item[i].hasAttribute('style') && Item[i].getElementsByTagName("tr"))) {
+                // if (Item[i].hasAttribute('style')) {
+                //     if (Item[i].style.display == "none")
+                //         Item[i].style.display = '';
+                // }
+                if ((Item[i].hasAttribute('style') && Item[i].getElementsByTagName("tr") && Item[i].getElementsByClassName("GMDataRow"))) {
                     var Item2 = Item[i];
                     if (bom_result.status == "exist") {
                         var cells = Item2.getElementsByTagName("td");
                         for (var j = 0; j < cells.length; j++) {
                             cells[j].style.backgroundColor = '#28FF28';
                         }
-                    } else if (bom_result.status == "not_exist" && bom_result.itemNumber.substring(0,2) == prefix) {
-                        var cells = Item2.getElementsByTagName("td");
-                        for (var j = 0; j < cells.length; j++) {
-                            cells[j].style.backgroundColor = "#FF9797";
+                        data.exist_list.push(bom_result.itemNumber);
+                    } else if (bom_result.status == "not_exist") {
+                        for (var index = 0; index < prefix_list.length; index++){
+                            if (bom_result.itemNumber.match(new RegExp(prefix_list[index])) !== null) {
+                                var cells = Item2.getElementsByTagName("td");
+                                for (var j = 0; j < cells.length; j++) {
+                                    cells[j].style.backgroundColor = "#FF9797";
+                                }
+                                data.not_exist_list.push(bom_result.itemNumber);
+                                break;
+                            }
                         }
                     }
                 }
