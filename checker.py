@@ -42,5 +42,9 @@ def match_list(team: str) -> list:
             return excel_to_list("EMC component list.xlsx", "AC/DC EMI filter"), ["^30\-20416\-0.{3}$", "^30\-20481\-0.{3}$", "^30\-20383\-1.{3}$", "^30\-500.{2}\-.{4}$", "^30\-500.{2}\-.{4}\-.{2}$", "^04\-02050\-.{4}$", "^04\-50505\-.{4}$"]
         case "EMI spring":
             return excel_to_list("EMC component list.xlsx", "EMI spring"), ["^40\-200.{2}\-.{4}$", "^62\-800.{2}\-.{4}$"]
+        case "Screw":
+            return excel_to_list("screw.xlsx"), ["^33\-.{5}\-.{4}$", "^33\-.{5}\-.{4}\-.{2}$"]
+        case "Carton":
+            return excel_to_list("carton.xlsx"), ["^46\-10.{3}\-.{4}$", "^46\-10.{3}\-.{4}\-.{2}$"]
         case "other":
             return excel_to_list("活頁簿1.xlsx", "工作表1")
