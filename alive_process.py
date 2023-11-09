@@ -4,6 +4,8 @@ import logging
 import threading
 
 if __name__ == "__main__":
+    file_handler = logging.FileHandler('log.txt')
+
     logging.basicConfig(
         format="[%(asctime)s][%(name)-5s][%(levelname)-5s] %(message)s (%(filename)s:%(lineno)d)",
         datefmt="%Y-%m-%d %H:%M:%S",
@@ -11,6 +13,7 @@ if __name__ == "__main__":
     main_logger = logging.getLogger('main')
     main_logger.setLevel(logging.INFO)
     main_logger.info('Start loggin')
+    main_logger.addHandler(file_handler)
 
     get_ip_thread = threading.Thread(target=alive_get_ipv4, args=(5000,))
     remove_pycache_thread = threading.Thread(target=remove_pycache)

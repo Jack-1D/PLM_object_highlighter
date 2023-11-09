@@ -15,6 +15,22 @@ from dotenv import load_dotenv, find_dotenv
 def alive_get_SP_file():
     '''每10分鐘抓一次sharepoint檔案'''
     load_dotenv(find_dotenv())
+    file_handler = logging.FileHandler('log.txt')
+    logging.basicConfig(
+        format="[%(asctime)s][%(name)-5s][%(levelname)-5s] %(message)s (%(filename)s:%(lineno)d)",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+    formatter = logging.Formatter(
+        "[%(asctime)s][%(name)-5s][%(levelname)-5s] %(message)s (%(filename)s:%(lineno)d)",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+    file_handler.setFormatter(formatter)
+    sp1_logger = logging.getLogger('main.sub_get_SP')
+    sp1_logger.setLevel(logging.DEBUG)
+    sp1_logger.addHandler(file_handler)
+    sp2_logger = logging.getLogger('main.sub_get_SP')
+    sp2_logger.setLevel(logging.DEBUG)
+    sp2_logger.addHandler(file_handler)
     while True:
         url = "https://ampro1.sharepoint.com/sites/TPDC%20Web%20Portal/PEC/MED"
 
@@ -27,9 +43,7 @@ def alive_get_SP_file():
         bytes_file_obj.write(response.content)
         bytes_file_obj.seek(0)
         df = pd.read_excel(bytes_file_obj, engine="openpyxl", sheet_name="Common Screw List")
-        sub_logger = logging.getLogger('main.sub_get_SP')
-        sub_logger.setLevel(logging.DEBUG)
-        sub_logger.info(f"Screw: {df['TPE Part No.']}")
+        sp1_logger.info(f"Screw: {df['TPE Part No.']}")
         df = df['TPE Part No.']
         df.to_excel('data_sheets/screw.xlsx', index=False)
 
@@ -39,9 +53,7 @@ def alive_get_SP_file():
         bytes_file_obj.write(response.content)
         bytes_file_obj.seek(0)
         df = pd.read_excel(bytes_file_obj, sheet_name="carton input data (TPE side)", skiprows=1)
-        sub_logger = logging.getLogger('main.sub_IP')
-        sub_logger.setLevel(logging.DEBUG)
-        sub_logger.info(f"Screw: {df['料號']}")
+        sp2_logger.info(f"Screw: {df['料號']}")
         df = df['料號']
         df.to_excel('data_sheets/carton.xlsx', index=False)
         
