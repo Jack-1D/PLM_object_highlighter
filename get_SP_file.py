@@ -15,22 +15,10 @@ from dotenv import load_dotenv, find_dotenv
 def alive_get_SP_file():
     '''每10分鐘抓一次sharepoint檔案'''
     load_dotenv(find_dotenv())
-    file_handler = logging.FileHandler('log.txt')
-    logging.basicConfig(
-        format="[%(asctime)s][%(name)-5s][%(levelname)-5s] %(message)s (%(filename)s:%(lineno)d)",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    )
-    formatter = logging.Formatter(
-        "[%(asctime)s][%(name)-5s][%(levelname)-5s] %(message)s (%(filename)s:%(lineno)d)",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    )
-    file_handler.setFormatter(formatter)
     sp1_logger = logging.getLogger('main.sub_get_SP')
-    sp1_logger.setLevel(logging.DEBUG)
-    sp1_logger.addHandler(file_handler)
+    sp1_logger.setLevel(logging.INFO)
     sp2_logger = logging.getLogger('main.sub_get_SP')
-    sp2_logger.setLevel(logging.DEBUG)
-    sp2_logger.addHandler(file_handler)
+    sp2_logger.setLevel(logging.INFO)
     while True:
         url = "https://ampro1.sharepoint.com/sites/TPDC%20Web%20Portal/PEC/MED"
 
