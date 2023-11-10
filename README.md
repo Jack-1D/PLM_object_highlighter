@@ -7,6 +7,7 @@ https://github.com/Jack-1D/PLM_object_highlighter.git
 cd PLM_object_highlighter
 python -m venv venv
 venv/Scripts/activate
+python -m pip install -r requirements.txt
 ``` 
 
 ## 執行(分成兩個process跑)
