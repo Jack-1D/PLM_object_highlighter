@@ -78,11 +78,11 @@ submit_button.addEventListener("click", async (e) => {
 function analyze(ip_address, team) {
     var BOM = [];
     // var Item = document.getElementById("treegrid_ITEMTABLE_BOM").getElementById("ITEMTABLE_BOM").getElementsByClassName("GMPageOne")[1].getElementsByClassName("GMSection")[0].getElementsByTagName("tbody")[0].querySelectorAll("tr.GMDataRow");
-    if(document.getElementById("ITEMTABLE_BOM") !== null)
+    if (document.getElementById("ITEMTABLE_BOM") !== null)
         var Item = document.getElementById("ITEMTABLE_BOM").getElementsByClassName("GMBodyMid")[0].querySelectorAll("tr.GMDataRow");
     else
         var Item = document.getElementById("BOM_EXPANDED_DISPLAY_1").getElementsByClassName("GMBodyMid")[0].querySelectorAll("tr.GMDataRow");
-    for (var i = 0; i < Item.length; i++){
+    for (var i = 0; i < Item.length; i++) {
         console.log(Item[i].querySelectorAll("td")[4].getElementsByTagName("a").innerText);
     }
     for (var i = 0; i < Item.length; i++) {
@@ -132,14 +132,22 @@ function analyze(ip_address, team) {
                         }
                         data.exist_list.push(bom_result.itemNumber);
                     } else if (bom_result.status == "not_exist") {
-                        for (var index = 0; index < prefix_list.length; index++){
+                        let match_flag = false;
+                        for (var index = 0; index < prefix_list.length; index++) {
                             if (bom_result.itemNumber.match(new RegExp(prefix_list[index])) !== null) {
+                                match_flag = true;
                                 var cells = Item2.getElementsByTagName("td");
                                 for (var j = 0; j < cells.length; j++) {
                                     cells[j].style.backgroundColor = "#FF9797";
                                 }
                                 data.not_exist_list.push(bom_result.itemNumber);
                                 break;
+                            }
+                        }
+                        if (!match_flag) {
+                            var cells = Item2.getElementsByTagName("td");
+                            for (var j = 0; j < cells.length; j++) {
+                                cells[j].style.backgroundColor = "#FFFFFF";
                             }
                         }
                     }
