@@ -131,13 +131,13 @@ def match_list(team: str) -> list:
             pattern = ["^33\-0", "^33\-1", "^33\-2", "^33\-6"]
             target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
-        case "六角銅柱":
-            target = excel_to_list("六角銅柱.xlsx")
+        case "六角螺柱":
+            target = excel_to_list("六角螺柱.xlsx")
             pattern = ["^33\-70", "^33\-71"]
             target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
         case "PCB SMD/DIP Nut":
-            target = excel_to_list("PCB SMD/DIP Nut.xlsx")
+            target = excel_to_list("PCB SMDDIP Nut.xlsx")
             pattern = ["^33\-72", "^33\-73"]
             target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
