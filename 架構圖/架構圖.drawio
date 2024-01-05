@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" modified="2024-01-05T03:47:26.679Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="Gc1O9FO55k_5_Fzs1OxW" version="22.1.16" type="device">
+  <diagram name="第 1 页" id="zsrg8XbmhCFExcl41Odr">
+    <mxGraphModel dx="1034" dy="455" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-2" value="fs1" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="348" width="400" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="yLGQsLpICkx2n2eQgz0B-2" source="yLGQsLpICkx2n2eQgz0B-3" target="yLGQsLpICkx2n2eQgz0B-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="80" />
+              <mxPoint x="200" y="80" />
+              <mxPoint x="200" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-3" value="Code&lt;br&gt;(&lt;font color=&quot;#ff0000&quot;&gt;每5分鐘&lt;/font&gt;需刪除__pycache__)&lt;br&gt;(&lt;font color=&quot;#ff0000&quot;&gt;每1分鐘&lt;/font&gt;需抓取Server IP)" style="whiteSpace=wrap;html=1;" vertex="1" parent="yLGQsLpICkx2n2eQgz0B-2">
+          <mxGeometry x="25" y="40" width="165" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-4" value="excel_sheet(from SharePoint)" style="whiteSpace=wrap;html=1;" vertex="1" parent="yLGQsLpICkx2n2eQgz0B-2">
+          <mxGeometry x="10" y="110" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-18" value="Server_Address.txt&lt;br&gt;(須定時更新)" style="whiteSpace=wrap;html=1;" vertex="1" parent="yLGQsLpICkx2n2eQgz0B-2">
+          <mxGeometry x="240" y="105" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="yLGQsLpICkx2n2eQgz0B-5" target="yLGQsLpICkx2n2eQgz0B-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-9" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;寫檔&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yLGQsLpICkx2n2eQgz0B-8">
+          <mxGeometry x="-0.2902" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-5" value="SharePoint" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="317.5" y="728" width="205" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-6" value="Online Excel" style="whiteSpace=wrap;html=1;" vertex="1" parent="yLGQsLpICkx2n2eQgz0B-5">
+          <mxGeometry x="45" y="30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.095;exitY=0.01;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="yLGQsLpICkx2n2eQgz0B-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-26" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;開port出來提供服務&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yLGQsLpICkx2n2eQgz0B-25">
+          <mxGeometry x="-0.1659" y="2" relative="1" as="geometry">
+            <mxPoint x="30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-10" value="Server" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="478" width="210" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-11" value="fs1權限&lt;br&gt;(adlink 帳號)" style="whiteSpace=wrap;html=1;" vertex="1" parent="yLGQsLpICkx2n2eQgz0B-10">
+          <mxGeometry x="48" y="37" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-12" value="SharePoint權限&lt;br&gt;(能開啟excel檔案的帳號密碼)&lt;br&gt;(帳號密碼存在.env中)" style="whiteSpace=wrap;html=1;" vertex="1" parent="yLGQsLpICkx2n2eQgz0B-10">
+          <mxGeometry x="20" y="105" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yLGQsLpICkx2n2eQgz0B-11" target="yLGQsLpICkx2n2eQgz0B-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="545" />
+              <mxPoint x="210" y="413" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-14" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Server 執行fs1 code&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yLGQsLpICkx2n2eQgz0B-13">
+          <mxGeometry x="0.355" y="-1" relative="1" as="geometry">
+            <mxPoint x="-37" y="29" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yLGQsLpICkx2n2eQgz0B-12" target="yLGQsLpICkx2n2eQgz0B-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="623" />
+              <mxPoint x="220" y="788" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-16" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;font color=&quot;#ff0000&quot;&gt;每10分鐘&lt;/font&gt;使用帳號密碼登入並access excel&lt;br&gt;(整個流程需花費2~3分鐘)&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yLGQsLpICkx2n2eQgz0B-15">
+          <mxGeometry x="0.3043" y="-2" relative="1" as="geometry">
+            <mxPoint x="-82" y="-50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-17" value="__pycache__&lt;br&gt;(須被刪除)&lt;br&gt;(若有，會無法新增至extension)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="388" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yLGQsLpICkx2n2eQgz0B-3" target="yLGQsLpICkx2n2eQgz0B-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="yLGQsLpICkx2n2eQgz0B-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-28" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;連線服務&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yLGQsLpICkx2n2eQgz0B-27">
+          <mxGeometry x="0.3158" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yLGQsLpICkx2n2eQgz0B-22" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="260" width="30" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
