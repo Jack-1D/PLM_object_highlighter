@@ -57,7 +57,7 @@ def alive_get_SP_file():
         print(f"六角螺柱: {df['料號']}")
         sp1_logger.info(f"六角螺柱: {df['料號']}")
         df = df['料號']
-        df.to_excel('data_sheets/六角螺柱.xlsx', index=False)
+        df.to_excel('data_sheets/standoff.xlsx', index=False)
 
         # PCB/SMD
         url = "https://ampro1.sharepoint.com/sites/TPDC%20Web%20Portal/PEC/MED"
@@ -70,13 +70,13 @@ def alive_get_SP_file():
         bytes_file_obj.seek(0)
         df = pd.read_excel(bytes_file_obj, engine="openpyxl", sheet_name=None)
         for k in df.keys():
-            if re.search("STEP1 PCB SMD Nut", k) != None:
+            if re.search("PCB SMD Nut", k) != None:
                 df = df[k]
                 break
-        print(f"STEP1 PCB SMD Nut: {df['料號']}")
-        sp1_logger.info(f"STEP1 PCB SMD Nut: {df['料號']}")
+        print(f"PCB SMD Nut: {df['料號']}")
+        sp1_logger.info(f"PCB SMD Nut: {df['料號']}")
         df = df['料號']
-        df.to_excel(f'data_sheets/PCB SMDDIP Nut.xlsx', index=False)
+        df.to_excel(f'data_sheets/smd nut.xlsx', index=False)
 
         # carton
         file_url = "/sites/TPDC%20Web%20Portal/PEC/MED/Shared%20Documents/MED%20Public/MED%20Carton,%20Box%20Dimension%20Search.xls"
@@ -84,9 +84,26 @@ def alive_get_SP_file():
         bytes_file_obj = io.BytesIO()
         bytes_file_obj.write(response.content)
         bytes_file_obj.seek(0)
-        df = pd.read_excel(bytes_file_obj, sheet_name="carton input data (TPE side)", skiprows=1)
-        sp2_logger.info(f"Screw: {df['料號']}")
-        df = df['料號']
-        df.to_excel('data_sheets/carton.xlsx', index=False)
+        df = pd.read_excel(bytes_file_obj, sheet_name=None, skiprows=1)
+        combine = pd.Series(name="料號")
+        for k in df.keys():
+            if re.search("carton input data", k) != None:
+                combine = pd.concat([combine, df[k]['料號']], axis=0, ignore_index=True)
+        sp2_logger.info(f"carton: {combine}")
+        combine.to_excel('data_sheets/carton.xlsx', index=False)
+
+        # pizza box
+        file_url = "/sites/TPDC%20Web%20Portal/PEC/MED/Shared%20Documents/MED%20Public/MED%20Carton,%20Box%20Dimension%20Search.xls"
+        response = File.open_binary(ctx, file_url)
+        bytes_file_obj = io.BytesIO()
+        bytes_file_obj.write(response.content)
+        bytes_file_obj.seek(0)
+        df = pd.read_excel(bytes_file_obj, sheet_name=None, skiprows=1)
+        combine = pd.Series(name="料號")
+        for k in df.keys():
+            if re.search("pizza box input data", k) != None:
+                combine = pd.concat([combine, df[k]['料號']], axis=0, ignore_index=True)
+        sp2_logger.info(f"Pizza box: {combine}")
+        combine.to_excel('data_sheets/pizza box.xlsx', index=False)
         
         time.sleep(600)
