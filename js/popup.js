@@ -7,6 +7,7 @@ const not_exist_itemNum = document.getElementById("not_exist_itemNum");
 const team_select = document.getElementById("team");
 const title = document.getElementById("title");
 const loading = document.getElementById("loading");
+const failed = document.getElementById("failed");
 
 
 var ip_address = "";
@@ -60,7 +61,7 @@ team_select.value = localStorage.getItem("team_select")
 // 主程式
 submit_button.addEventListener("click", async (e) => {
     e.preventDefault();
-    loading.style = "display: block;";
+    failed.style = "display: none;";
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     loading.style = "display: block;";
     chrome.scripting.executeScript({
@@ -69,13 +70,24 @@ submit_button.addEventListener("click", async (e) => {
         args: [ip_address, team_select.value]
     },
         (analyze_result) => {
-            loading.style = "display: block;";
-            console.log(analyze_result);
-            exist_text.innerText = analyze_result[0].result.exist_list.length;
-            not_exist_text.innerText = analyze_result[0].result.not_exist_list.length;
-            exist_itemNum.innerText = analyze_result[0].result.exist_list.join('\n');
-            not_exist_itemNum.innerText = analyze_result[0].result.not_exist_list.join('\n');
-            localStorage.setItem("team_select", team_select.value);
+            // 處理非200
+            if (analyze_result[0].result.hasOwnProperty('failed')) {
+                failed.style = "display: block;";
+                exist_text.innerText = "0";
+                not_exist_text.innerText = "0";
+                exist_itemNum.innerText = "";
+                not_exist_itemNum.innerText = "";
+                localStorage.setItem("team_select", team_select.value);
+            }
+            // 處理200
+            else {
+                console.log(analyze_result);
+                exist_text.innerText = analyze_result[0].result.exist_list.length;
+                not_exist_text.innerText = analyze_result[0].result.not_exist_list.length;
+                exist_itemNum.innerText = analyze_result[0].result.exist_list.join('\n');
+                not_exist_itemNum.innerText = analyze_result[0].result.not_exist_list.join('\n');
+                localStorage.setItem("team_select", team_select.value);
+            }
             loading.style = "display: none;";
         });
 });
@@ -118,6 +130,18 @@ function analyze(ip_address, team) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            if (data.hasOwnProperty('failed')) {
+                for (var i = 0; i < Item.length; i++) {
+                    if ((Item[i].hasAttribute('style') && Item[i].getElementsByTagName("tr") && Item[i].getElementsByClassName("GMDataRow"))) {
+                        var Item2 = Item[i];
+                        var cells = Item2.getElementsByTagName("td");
+                        for (var j = 0; j < cells.length; j++) {
+                            cells[j].style.backgroundColor = "#FFFFFF";
+                        }
+                    }
+                }
+                return data;
+            }
             data.exist_list = new Array();
             data.not_exist_list = new Array();
             for (var i = 0; i < Item.length; i++) {

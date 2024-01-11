@@ -13,10 +13,13 @@ CORS(app)
 @app.route("/", methods=["POST", "GET"])
 def interact():
     if request.method == "POST":
-        target_list, prefix_list = match_list(json.loads(list(request.form.keys())[0])["team"])
-        bom = json.loads(list(request.form.keys())[0])["BOM"]
-        add_check_status(target_list, bom)
-        return json.dumps({"bom":bom, "prefix_list":prefix_list})
+        try:
+            target_list, prefix_list = match_list(json.loads(list(request.form.keys())[0])["team"])
+            bom = json.loads(list(request.form.keys())[0])["BOM"]
+            add_check_status(target_list, bom)
+            return json.dumps({"bom":bom, "prefix_list":prefix_list})
+        except Exception:
+            return json.dumps({"failed": True})
     return json.dumps({"connected":True})
 
 

@@ -28,10 +28,10 @@ def match_list(team: str) -> list:
     match team:
         case "cable":
             target = excel_to_list("Cable Library Tool 202301.xlsm", "Common parts")
-            pattern = [
-                "^30\-.{5}\-.{4}\-.{2}$"
+            pattern = ["^30\-.{5}\-.{4}\-.{2}$"]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
         case "TVS":
             target = excel_to_list("EMC component list.xlsx", "TVS")
@@ -41,35 +41,37 @@ def match_list(team: str) -> list:
                 "^69\-00000\-.{4}\-.{4}$",
                 "^19\-91.{3}\-.{4}$",
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "GDT":
             target = excel_to_list("EMC component list.xlsx", "GDT")
-            pattern = [
-                "^69\-93.{3}\-.{4}$"
+            pattern = ["^69\-93.{3}\-.{4}$"]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
         case "Varistor":
             target = excel_to_list("EMC component list.xlsx", "Varistor")
-            pattern = [
-                "^69\-700.{2}\-.{4}$"
+            pattern = ["^69\-700.{2}\-.{4}$"]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
         case "Bead":
             target = excel_to_list("EMC component list.xlsx", "Bead")
-            pattern = [
-                "^68\-.{5}\-.{4}$"
+            pattern = ["^68\-.{5}\-.{4}$"]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
         case "Common mode choke":
             target = excel_to_list("EMC component list.xlsx", "Common mode choke")
-            pattern = [
-                "^68\-.{5}\-.{4}$"
+            pattern = ["^68\-.{5}\-.{4}$"]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
         case "安規電容":
             target = excel_to_list("EMC component list.xlsx", "安規電容")
@@ -80,7 +82,9 @@ def match_list(team: str) -> list:
                 "^78\-.{4}E\-.{4}$",
                 "^78\-.{4}9\-2.{3}$",
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "Gasket":
             target = excel_to_list("EMC component list.xlsx", "Gasket")
@@ -88,7 +92,9 @@ def match_list(team: str) -> list:
                 "^40\-00.{3}\-.{4}$",
                 "^40\-00.{3}\-.{4}\-.{2}$",
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "Conductive tape":
             target = excel_to_list("EMC component list.xlsx", "Conductive tape ")
@@ -96,14 +102,16 @@ def match_list(team: str) -> list:
                 "^40\-00.{3}\-.{4}$",
                 "^40\-00.{3}\-.{4}\-.{2}$",
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "Ferrite core":
             target = excel_to_list("EMC component list.xlsx", "Ferrite-core")
-            pattern = [
-                "^40\-3.{4}\-.{4}\-.{2}$"
+            pattern = ["^40\-3.{4}\-.{4}\-.{2}$"]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
             return target, pattern
         case "AC/DC EMI filter":
             target = excel_to_list("EMC component list.xlsx", "AC&DC EMI filter")
@@ -116,7 +124,9 @@ def match_list(team: str) -> list:
                 "^04\-02050\-.{4}$",
                 "^04\-50505\-.{4}$",
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "EMI spring":
             target = excel_to_list("EMC component list.xlsx", "EMI spring")
@@ -124,32 +134,44 @@ def match_list(team: str) -> list:
                 "^40\-200.{2}\-.{4}$",
                 "^62\-800.{2}\-.{4}$",
             ]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "Screw":
             target = excel_to_list("screw.xlsx")
             pattern = ["^33\-0", "^33\-1", "^33\-2", "^33\-6"]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "六角螺柱":
             target = excel_to_list("standoff.xlsx")
             pattern = ["^33\-70", "^33\-71"]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "PCB SMD Nut":
             target = excel_to_list("smd nut.xlsx")
             pattern = ["^33\-72", "^33\-73"]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "Carton":
             target = excel_to_list("carton.xlsx")
             pattern = ["^46\-1"]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "Pizza box":
             target = excel_to_list("pizza box.xlsx")
             pattern = ["^46\-02", "^46\-2"]
-            target = [t for t in target for p in pattern if re.search(p, str(t)) != None]
+            target = [
+                t for t in target for p in pattern if re.search(p, str(t)) != None
+            ]
             return target, pattern
         case "other":
             return excel_to_list("活頁簿1.xlsx", "工作表1")
