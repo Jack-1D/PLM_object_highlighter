@@ -31,14 +31,17 @@ def alive_get_SP_file():
         bytes_file_obj.write(response.content)
         bytes_file_obj.seek(0)
         df = pd.read_excel(bytes_file_obj, engine="openpyxl", sheet_name=None)
+        combine = pd.Series(name="料號")
         for k in df.keys():
             if re.search("Common Screw List", k) != None:
                 df = df[k]
                 break
-        print(f"Screw: {df['TPE Part No.']}")
-        sp1_logger.info(f"Screw: {df['TPE Part No.']}")
-        df = df['TPE Part No.']
-        df.to_excel('data_sheets/screw.xlsx', index=False)
+        combine = pd.concat([combine, df['TPE Part No.']], axis=0, ignore_index=True)
+        combine = pd.concat([combine, df['SH Part No.']], axis=0, ignore_index=True)
+        combine.name = '料號'
+        print(f"Screw: {combine}")
+        sp1_logger.info(f"Screw: {combine}")
+        combine.to_excel('data_sheets/screw.xlsx', index=False)
 
         # 六角銅柱
         url = "https://ampro1.sharepoint.com/sites/TPDC%20Web%20Portal/PEC/MED"

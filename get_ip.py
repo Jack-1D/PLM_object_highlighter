@@ -12,8 +12,8 @@ def get_ipv4(PORT: int) -> None:
     for ip in ip_result:
         ip_list.append(ip.group())
     with open('./Server_Address.txt', 'w') as f:
-        f.write(f"https://{ip_list[0]}:{PORT}/")
-    ip_logger.info(f"Get IP: https://{ip_list[0]}:{PORT}/")
+        f.write(f"https://{ip_list[2]}:{PORT}/")
+    ip_logger.info(f"Get IP: https://{ip_list[2]}:{PORT}/")
     return
 
 def alive_get_ipv4(PORT: int) -> None:
