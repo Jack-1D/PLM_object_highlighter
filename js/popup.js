@@ -119,7 +119,7 @@ function analyze(ip_address, team) {
     console.clear();
     console.log(BOM);
     console.log(ip_address);
-    check_result = fetch("https://172.30.200.130:5000/", {
+    check_result = fetch(ip_address, {
         method: 'POST',
         headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
         body: JSON.stringify({
