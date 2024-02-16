@@ -15,5 +15,8 @@ python -m pip install -r requirements.txt
 python app.py
 # or
 # flask run --host=0.0.0.0 --cert=adhoc
-python alive_process.py
+# 刪除__pycache__、上傳ip
+# python alive_process.py
+# 目前改上傳到google drive
+python upload.py
 ```
