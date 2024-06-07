@@ -139,35 +139,35 @@ def match_list(team: str) -> list:
             ]
             return target, pattern
         case "Screw":
-            target = excel_to_list("screw.xlsx")
-            pattern = ["^33\-0", "^33\-1", "^33\-2", "^33\-6"]
+            target = excel_to_list("ME screw common parts.xlsx")
+            pattern = ["^33\-0", "^33\-1", "^33\-2", "^33\-6", "^33\-5"]
             target = [
                 t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
             return target, pattern
         case "六角螺柱":
-            target = excel_to_list("standoff.xlsx")
+            target = excel_to_list("ME standoff common parts.xlsx")
             pattern = ["^33\-70", "^33\-71"]
             target = [
                 t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
             return target, pattern
         case "PCB SMD Nut":
-            target = excel_to_list("smd nut.xlsx")
+            target = excel_to_list("ME pcb smt nut common parts.xlsx")
             pattern = ["^33\-72", "^33\-73"]
             target = [
                 t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
             return target, pattern
         case "Carton":
-            target = excel_to_list("carton.xlsx")
+            target = excel_to_list("ME carton common parts.xlsx")
             pattern = ["^46\-1"]
             target = [
                 t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
             return target, pattern
         case "Pizza box":
-            target = excel_to_list("pizza box.xlsx")
+            target = excel_to_list("ME pizza box common parts.xlsx")
             pattern = ["^46\-02", "^46\-2"]
             target = [
                 t for t in target for p in pattern if re.search(p, str(t)) != None

@@ -15,10 +15,13 @@ def interact():
     if request.method == "POST":
         try:
             target_list, prefix_list = match_list(json.loads(list(request.form.keys())[0])["team"])
+            # 去掉頭尾可能出現的space
+            target_list = [t.strip() for t in target_list]
             bom = json.loads(list(request.form.keys())[0])["BOM"]
             add_check_status(target_list, bom)
             return json.dumps({"bom":bom, "prefix_list":prefix_list})
         except Exception:
+            print(Exception)
             return json.dumps({"failed": True})
     return json.dumps({"connected":True})
 

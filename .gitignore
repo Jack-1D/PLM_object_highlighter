@@ -1,14 +1,14 @@
 # xlsm
 data_sheets/
 
+# client_secrets
+client_secrets.json
+
 # log
 log.txt
 
 # IP
 Server_Address.txt
-
-# client_secrets
-client_secrets.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

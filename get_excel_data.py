@@ -12,4 +12,7 @@ def excel_to_list(path: str, sheet_name: str = "Sheet1", line_index: int = 0):
     flatten_list = lambda l : [flat for tmp in l for flat in flatten_list(tmp)] if type(l) == list else [l]
 
     flat_list = flatten_list(object_list)
-    return flat_list
+    flat_list_set = set()
+    for e in flat_list:
+        flat_list_set.add(e)
+    return list(flat_list_set)
