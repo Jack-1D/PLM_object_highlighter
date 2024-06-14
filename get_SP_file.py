@@ -96,12 +96,13 @@ def alive_get_SP_file():
         except Exception as e:
             print(f"Error: {e}\n")
 
-        # carton
+        # carton & pizza box
         try:
+            carton_pizzabox_sheet = ["Carton", "Box"]
             url = "https://ampro1.sharepoint.com/sites/TPDC%20Web%20Portal/PEC/MED"
             user_credentials = UserCredential(os.getenv('SP_USERNAME'),os.getenv('SP_PASSWORD'))
             ctx = ClientContext(url).with_credentials(user_credentials)
-            file_url = "/sites/TPDC%20Web%20Portal/PEC/MED/Shared%20Documents/MED%20Public/MED%20Carton,%20Box%20Dimension%20Search%20-%2020240521.xls"
+            file_url = "/sites/TPDC%20Web%20Portal/PEC/MED/Shared%20Documents/03_%E6%A9%9F%E6%A7%8B%E8%A8%AD%E8%A8%88/MED%20Carton,%20Box%20Dimension%20Search.xlsx"
             response = File.open_binary(ctx, file_url)
             bytes_file_obj = io.BytesIO()
             bytes_file_obj.write(response.content)
@@ -109,35 +110,18 @@ def alive_get_SP_file():
             df = pd.read_excel(bytes_file_obj, sheet_name=None, skiprows=1)
             combine = pd.Series(name="料號")
             for k in df.keys():
-                if re.search("Carton", k) != None:
-                    combine = pd.concat([combine, df[k]['料號']], axis=0, ignore_index=True)
+                for sheet in carton_pizzabox_sheet:
+                    if re.search(sheet, k) != None:
+                        if '台北料號' in df[k]:
+                            combine = pd.concat([combine, df[k]['台北料號']], axis=0, ignore_index=True)
+                            combine = pd.concat([combine, df[k]['上海料號']], axis=0, ignore_index=True)
+                        else:
+                            combine = pd.concat([combine, df[k]['料號']], axis=0, ignore_index=True)
+                            combine = pd.concat([combine, df[k]['皆為兩地common part']], axis=0, ignore_index=True)
             combine.name = '料號'
-            print(f"carton: {combine}")
-            sp2_logger.info(f"carton: {combine}")
+            print(f"carton & pizza box: {combine}")
+            sp2_logger.info(f"carton & pizza box: {combine}")
             combine.to_excel('data_sheets/ME carton common parts.xlsx', index=False)
-        except Exception as e:
-            print(f"Error: {e}\n")
-
-        # pizza box
-        try:
-            url = "https://ampro1.sharepoint.com/sites/TPDC%20Web%20Portal/PEC/MED"
-            user_credentials = UserCredential(os.getenv('SP_USERNAME'),os.getenv('SP_PASSWORD'))
-            ctx = ClientContext(url).with_credentials(user_credentials)
-            file_url = "/sites/TPDC%20Web%20Portal/PEC/MED/Shared%20Documents/MED%20Public/MED%20Carton,%20Box%20Dimension%20Search%20-%2020240521.xls"
-            response = File.open_binary(ctx, file_url)
-            bytes_file_obj = io.BytesIO()
-            bytes_file_obj.write(response.content)
-            bytes_file_obj.seek(0)
-            df = pd.read_excel(bytes_file_obj, sheet_name=None, skiprows=1)
-            combine = pd.Series(name="料號")
-            for k in df.keys():
-                if re.search("Box", k) != None:
-                    print(k)
-                    combine = pd.concat([combine, df[k]['料號']], axis=0, ignore_index=True)
-            combine.name = '料號'
-            print(f"pizza box: {combine}")
-            sp2_logger.info(f"Pizza box: {combine}")
-            combine.to_excel('data_sheets/ME pizza box common parts.xlsx', index=False)
         except Exception as e:
             print(f"Error: {e}\n")
         

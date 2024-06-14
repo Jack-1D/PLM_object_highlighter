@@ -20,8 +20,8 @@ def interact():
             bom = json.loads(list(request.form.keys())[0])["BOM"]
             add_check_status(target_list, bom)
             return json.dumps({"bom":bom, "prefix_list":prefix_list})
-        except Exception:
-            print(Exception)
+        except Exception as e:
+            print(e)
             return json.dumps({"failed": True})
     return json.dumps({"connected":True})
 

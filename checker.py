@@ -159,16 +159,9 @@ def match_list(team: str) -> list:
                 t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
             return target, pattern
-        case "Carton":
+        case "Carton and Pizza box":
             target = excel_to_list("ME carton common parts.xlsx")
-            pattern = ["^46\-1"]
-            target = [
-                t for t in target for p in pattern if re.search(p, str(t)) != None
-            ]
-            return target, pattern
-        case "Pizza box":
-            target = excel_to_list("ME pizza box common parts.xlsx")
-            pattern = ["^46\-02", "^46\-2"]
+            pattern = ["^46\-1", "^46\-02", "^46\-2"]
             target = [
                 t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
