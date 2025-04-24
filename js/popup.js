@@ -58,6 +58,24 @@ function openURL() {
 
 team_select.value = localStorage.getItem("team_select")
 
+document.getElementById('team').addEventListener('change', (event) => {
+    const target = document.getElementById("team");
+    const targetValue = target.value;
+    check_result = fetch(ip_address, {
+        method: 'POST',
+        headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
+        body: JSON.stringify({
+            'team':targetValue 
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            const changetxt = document.getElementById("lastUpdate");
+            changetxt.textContent = "上次更新時間: " + data["time"];
+        });
+});
+
 // 主程式
 submit_button.addEventListener("click", async (e) => {
     e.preventDefault();

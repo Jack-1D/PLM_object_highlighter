@@ -4,8 +4,8 @@
 import os, re, time, shutil, logging
 def get_ipv4(PORT: int) -> None:
     '''ipv4地址寫檔至Server_Address.txt'''
-    ip_logger = logging.getLogger('main.sub_IP')
-    ip_logger.setLevel(logging.INFO)
+    # ip_logger = logging.getLogger('main.sub_IP')
+    # ip_logger.setLevel(logging.INFO)
     ip_list = []
     ip_result = os.popen('ipconfig','r').read()
     ip_result = re.finditer(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', ip_result, re.I)
@@ -15,7 +15,7 @@ def get_ipv4(PORT: int) -> None:
         for ip in ip_list:
             if ip[:3] == "172" and ip.split('.')[3] != '1':
                 f.write(f"https://{ip}:{PORT}/")
-                ip_logger.info(f"Get IP: https://{ip}:{PORT}/")
+                # ip_logger.info(f"Get IP: https://{ip}:{PORT}/")
                 break
     return
 
@@ -27,12 +27,12 @@ def alive_get_ipv4(PORT: int) -> None:
 
 def remove_pycache() -> None:
     '''每5分鐘刪一次cache'''
-    cache_logger = logging.getLogger('main.sub_remove_pycache')
-    cache_logger.setLevel(logging.INFO)
+    # cache_logger = logging.getLogger('main.sub_remove_pycache')
+    # cache_logger.setLevel(logging.INFO)
     while True:
         if os.path.exists("__pycache__"):
             shutil.rmtree("__pycache__")
-        cache_logger.info(f"Remove __pycache__")
+        # cache_logger.info(f"Remove __pycache__")
         
         time.sleep(300)
 

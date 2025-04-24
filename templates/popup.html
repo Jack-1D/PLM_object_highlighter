@@ -1,119 +1,123 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="highlight_button.css">
-        <link rel="stylesheet" href="loading.css">
-        <style>
-            textarea {
-              resize: none;
-            }
-        
-            body::-webkit-scrollbar {
-              display: none;
-            }
-        
-            body {
-              width: 600px;
-              height: 200px;
-              overflow: visible;
-            }
-          </style>
-    </head>
 
-    <body>
-        <div style="background-color: #EBD3E8;">
-            <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
-              <div style="padding-left: 10px;padding-top: 25px;">
-                  <button id="connect"
-                      style="border-color: blue;background-color: white;">need
-                      connect</button>
-              </div>
-              <h1 id="title" style="text-align: center;color: #FF8000;">PLM Object Highlighter</h1>
-              <div style="position: relative;">
-                <div style="position: absolute;">
-                  <div class="spinner-box" id="loading" style="display: none;">
-                    <div class="three-quarter-spinner">
-                  </div>
-                </div>
-                <div style="position: absolute; left: 50px; top: 10px;">
-                  <img src="../images/failed.png" height="50px" id="failed" style="display: none;" />
-                </div>
-              </div>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="highlight_button.css">
+  <link rel="stylesheet" href="loading.css">
+  <style>
+    textarea {
+      resize: none;
+    }
 
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    body {
+      width: 600px;
+      height: 200px;
+      overflow: visible;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="background-color: #EBD3E8;">
+    <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+      <div style="padding-left: 10px;padding-top: 25px;">
+        <button id="connect" style="border-color: blue;background-color: white;">need
+          connect</button>
+      </div>
+      <div>
+        <h1 id="title" style="text-align: center;color: #FF8000;">PLM Object Highlighter</h1>
+        <h2 id="lastUpdate" style="color: #FF2D2D;"></h2>
+      </div>
+      <div style="position: relative;">
+        <div style="position: absolute;">
+          <div class="spinner-box" id="loading" style="display: none;">
+            <div class="three-quarter-spinner">
             </div>
-            <div style="clear:both;"></div>
-            <div>
-              <h2 style="color: #000079;padding-left: 100px;margin: 2px;">Team:</h2>
-              <form method="post">
-                  <div style="display: flex;flex-direction:row;">
-                      <div style="padding-left: 20px;padding-top: 10px;">
-                          <select name="team" id="team" style="font-size: 20px;">
-                              <option value="cable">cable</option>
-                              <option value="TVS">TVS</option>
-                              <option value="GDT">GDT</option>
-                              <option value="Varistor">Varistor</option>
-                              <option value="Bead">Bead</option>
-                              <option value="Common mode choke">Common mode choke</option>
-                              <option value="安規電容">安規電容</option>
-                              <option value="Gasket">Gasket</option>
-                              <option value="Conductive tape">Conductive tape</option>
-                              <option value="Ferrite core">Ferrite core</option>
-                              <option value="AC/DC EMI filter">AC/DC EMI filter</option>
-                              <option value="EMI spring">EMI spring</option>
-                              <option value="Screw">Screw</option>
-                              <option value="六角螺柱">六角螺柱</option>
-                              <option value="PCB SMD Nut">PCB SMD Nut</option>
-                              <option value="Carton and Pizza box">Carton&Pizza box</option>
-                          </select>
-                      </div>
-                      <div style="padding-left: 95px;">
-                          <input class="btn" type="submit" id="submit_button" style="width: 250px;height: 50px;" value="Highlight">
-                      </div>
-                  </div>
-              </form>
-            </div>
-            <div style="display: flex;flex-direction:row;position:relative;">
-                <div style="display: flex;flex-direction:column;">
-                  <div style="text-align: center;">
-                    <h2>Exist</h2>
-                </div>
-                <div style="text-align: center;margin-left: 100px;">
-                  <div id="name_result" style="width: 100px;height: 30px;border: solid #000;background-color: #53FF53;">
-                    <div id="exist_text" style="font-size: 20px;height: 30px;line-height: 30px;">
-                      0
-                    </div>
-                  </div>
-                </div>
-                <div style="margin-top: 10px;margin-left: 10px;height: 100%;">
-                    <div style="width: 280px;border: solid #000;background-color: white;height: 100%;">
-                      <div id="exist_itemNum" style="font-size: 20px;text-align: center;">
-                        result
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="display: flex;flex-direction:column;">
-                  <div style="text-align: center;">
-                    <h2>Not Exist</h2>
-                  </div>
-                  <div style="text-align: center;margin-left: 100px;">
-                    <div id="bom_result" style="width: 100px;height: 30px;border: solid #000;background-color: #FF0000;">
-                      <div id="not_exist_text" style="font-size: 20px;height: 30px;line-height: 30px;">
-                        0
-                      </div>
-                    </div>
-                  </div>
-                  <div style="margin-top: 10px;margin-left: 10px;height: 100%;">
-                    <div style="width: 280px;border: solid #000;background-color: white;height: 100%;">
-                      <div id="not_exist_itemNum" style="font-size: 20px;text-align: center;">
-                        result
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          </div>
+          <div style="position: absolute; left: 50px; top: 10px;">
+            <img src="../images/failed.png" height="50px" id="failed" style="display: none;" />
+          </div>
         </div>
-        <script src="/js/popup.js"></script>
-    </body>
+
+      </div>
+      <div style="clear:both;"></div>
+      <div>
+        <h2 style="color: #000079;padding-left: 100px;margin: 2px;">Team:</h2>
+        <form method="post">
+          <div style="display: flex;flex-direction:row;">
+            <div style="padding-left: 20px;padding-top: 10px;">
+              <select name="team" id="team" style="font-size: 20px;">
+                <option value="cable">cable</option>
+                <option value="TVS">TVS</option>
+                <option value="GDT">GDT</option>
+                <option value="Varistor">Varistor</option>
+                <option value="Bead">Bead</option>
+                <option value="Common mode choke">Common mode choke</option>
+                <option value="安規電容">安規電容</option>
+                <option value="Gasket">Gasket</option>
+                <option value="Conductive tape">Conductive tape</option>
+                <option value="Ferrite core">Ferrite core</option>
+                <option value="AC/DC EMI filter">AC/DC EMI filter</option>
+                <option value="EMI spring">EMI spring</option>
+                <option value="Screw">Screw</option>
+                <option value="六角螺柱">六角螺柱</option>
+                <option value="PCB SMD Nut">PCB SMD Nut</option>
+                <option value="Carton and Pizza box">Carton&Pizza box</option>
+              </select>
+            </div>
+            <div style="padding-left: 95px;">
+              <input class="btn" type="submit" id="submit_button" style="width: 250px;height: 50px;" value="Highlight">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div style="display: flex;flex-direction:row;position:relative;">
+        <div style="display: flex;flex-direction:column;">
+          <div style="text-align: center;">
+            <h2>Exist</h2>
+          </div>
+          <div style="text-align: center;margin-left: 100px;">
+            <div id="name_result" style="width: 100px;height: 30px;border: solid #000;background-color: #53FF53;">
+              <div id="exist_text" style="font-size: 20px;height: 30px;line-height: 30px;">
+                0
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 10px;margin-left: 10px;height: 100%;">
+            <div style="width: 280px;border: solid #000;background-color: white;height: 100%;">
+              <div id="exist_itemNum" style="font-size: 20px;text-align: center;">
+                result
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex;flex-direction:column;">
+          <div style="text-align: center;">
+            <h2>Not Exist</h2>
+          </div>
+          <div style="text-align: center;margin-left: 100px;">
+            <div id="bom_result" style="width: 100px;height: 30px;border: solid #000;background-color: #FF0000;">
+              <div id="not_exist_text" style="font-size: 20px;height: 30px;line-height: 30px;">
+                0
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 10px;margin-left: 10px;height: 100%;">
+            <div style="width: 280px;border: solid #000;background-color: white;height: 100%;">
+              <div id="not_exist_itemNum" style="font-size: 20px;text-align: center;">
+                result
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/popup.js"></script>
+</body>
+
 </html>

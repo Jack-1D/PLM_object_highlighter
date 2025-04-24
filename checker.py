@@ -140,7 +140,7 @@ def match_list(team: str) -> list:
             return target, pattern
         case "Screw":
             target = excel_to_list("ME screw common parts.xlsx")
-            pattern = ["^33\-0", "^33\-1", "^33\-2", "^33\-6", "^33\-5"]
+            pattern = ["^33\-0", "^33\-1", "^33\-2", "^33\-5"]
             target = [
                 t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
@@ -161,7 +161,7 @@ def match_list(team: str) -> list:
             return target, pattern
         case "Carton and Pizza box":
             target = excel_to_list("ME carton common parts.xlsx")
-            pattern = ["^46\-1", "^46\-02", "^46\-2"]
+            pattern = ["^46\-1", "^46\-02", "^46\-2", "^46\-01"]
             target = [
                 t for t in target for p in pattern if re.search(p, str(t)) != None
             ]
